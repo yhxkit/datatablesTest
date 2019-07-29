@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>테스트 페이지임</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="/DataTables/datatables.js"></script>
+
+
+    <script>
+        $(function () {
+            $('#userTable').dataTable({
+                'processing': true,
+                'serverSide': true,
+                'searchDelay': 1000,
+                'ajax':{
+                    'url': '/getTable',
+                    'type': 'POST'
+                },
+                columns:[
+                    {data: 'userId', "fnCreatedCell": function(nTd, sData, oData, iRow){
+                            $(nTd).html('<a href="get?id=>' + oData.userId +'">' + oData.userId + '</a>');
+                        }},
+                    {data: 'userNum'},
+                    {data: 'nickName'}
+                ]
+            });
+        });
+
+
+    </script>
+</head>
+<body>
+
+<p>그냥 해보겠스니다.ㄴ</p>
+<div>
+    <table id="userTable">
+        <thead>
+        <tr>
+            <td>유번</td>
+            <td>아이디</td>
+            <td>닉네임</td>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+</body>
+</html>
